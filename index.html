@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="hy">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Այգեստան | Ռեստորան</title>
+  <meta name="description" content="Այգեստան ռեստորան՝ համեղ խոհանոց և հարմարավետ մթնոլորտ։ Ամրագրեք ձեր սեղանը հիմա։">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="logo">Այգեստան</a>
+      <nav class="main-nav" aria-label="Հիմնական նավիգացիա">
+        <ul>
+          <li><a href="index.html" aria-current="page">Գլխավոր</a></li>
+          <li><a href="booking.html">Ամրագրել</a></li>
+          <li><a href="my-bookings.html">Իմ ամրագրումները</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero container">
+      <h1>Այգեստան</h1>
+      <p>
+        Ավանդական հայկական խոհանոց՝ ժամանակակից մատուցմամբ։ Մեր ռեստորանում
+        ձեզ սպասվում է հարմարավետ մթնոլորտ, թարմ բաղադրիչներ և ջերմ սպասարկում։
+      </p>
+      <a href="booking.html" class="btn">Ամրագրել սեղան</a>
+    </section>
+
+    <section class="hours container">
+      <h2>Աշխատանքային ժամեր</h2>
+      <dl id="working-hours">
+        <!-- Ժամերը կլրացվեն js/services.js-ից -->
+      </dl>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Այգեստան</p>
+  </footer>
+
+  <script src="js/services.js"></script>
+  <script>
+    const hoursList = document.getElementById("working-hours");
+    restaurantInfo.workingHours.forEach(({ day, hours }) => {
+      const row = document.createElement("div");
+      row.className = "hours-row";
+      row.innerHTML = `<dt>${day}</dt><dd>${hours}</dd>`;
+      hoursList.appendChild(row);
+    });
+  </script>
+</body>
+</html>

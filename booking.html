@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="hy">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ամրագրել սեղան</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="logo">Այգեստան</a>
+      <nav class="main-nav" aria-label="Հիմնական նավիգացիա">
+        <ul>
+          <li><a href="index.html">Գլխավոր</a></li>
+          <li><a href="booking.html" aria-current="page">Ամրագրել</a></li>
+          <li><a href="my-bookings.html">Իմ ամրագրումները</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1>Ամրագրել սեղան</h1>
+
+    <form id="booking-form" class="booking-form" novalidate>
+      <div class="form-field">
+        <label for="name">Անուն</label>
+        <input type="text" id="name" name="name" required>
+        <span class="field-error" id="name-error"></span>
+      </div>
+
+      <div class="form-field">
+        <label for="phone">Հեռախոսահամար</label>
+        <input type="tel" id="phone" name="phone" required>
+        <span class="field-error" id="phone-error"></span>
+      </div>
+
+      <div class="form-field">
+        <label for="date">Ամսաթիվ</label>
+        <input type="date" id="date" name="date" required>
+        <span class="field-error" id="date-error"></span>
+      </div>
+
+      <div class="form-field">
+        <label for="time">Ժամ</label>
+        <select id="time" name="time" required>
+          <option value="" disabled selected>Ընտրեք ժամը</option>
+        </select>
+        <span class="field-error" id="time-error"></span>
+      </div>
+
+      <div class="form-field">
+        <label for="guests">Մարդկանց քանակ</label>
+        <input type="number" id="guests" name="guests" min="1" max="10" required>
+        <span class="field-error" id="guests-error"></span>
+      </div>
+
+      <div class="form-field">
+        <label for="notes">Հատուկ ցանկություններ</label>
+        <textarea id="notes" name="notes" rows="4"></textarea>
+      </div>
+
+      <p id="form-message" class="form-message" role="status" aria-live="polite"></p>
+
+      <button type="submit" class="btn">Ամրագրել</button>
+    </form>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Այգեստան</p>
+  </footer>
+
+  <script src="js/services.js"></script>
+  <script src="js/booking.js"></script>
+</body>
+</html>

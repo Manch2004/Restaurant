@@ -3,72 +3,118 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ամրագրել սեղան</title>
+  <title data-i18n="booking.pageTitle">Ամրագրել սեղան</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <script src="js/theme.js"></script>
+  <script src="js/translations.js"></script>
+  <script src="js/language.js"></script>
   <header class="site-header">
     <div class="container">
       <a href="index.html" class="logo">Այգեստան</a>
-      <nav class="main-nav" aria-label="Հիմնական նավիգացիա">
+      <nav class="main-nav" data-i18n="nav.ariaLabel" data-i18n-attr="aria-label" aria-label="Հիմնական նավիգացիա">
         <ul>
-          <li><a href="index.html">Գլխավոր</a></li>
-          <li><a href="booking.html" aria-current="page">Ամրագրել</a></li>
-          <li><a href="my-bookings.html">Իմ ամրագրումները</a></li>
+          <li><a href="index.html" data-i18n="nav.home">Գլխավոր</a></li>
+          <li><a href="menu.html" data-i18n="nav.menu">Մենյու</a></li>
+          <li><a href="booking.html" aria-current="page" data-i18n="nav.booking">Ամրագրել</a></li>
+          <li><a href="my-bookings.html" data-i18n="nav.myBookings">Իմ ամրագրումները</a></li>
+          <li>
+            <div class="lang-switch" role="group" data-i18n="lang.ariaLabel" data-i18n-attr="aria-label" aria-label="Ընտրել լեզուն">
+              <button type="button" class="lang-btn" data-lang="hy">ՀԱՅ</button>
+              <button type="button" class="lang-btn" data-lang="en">ENG</button>
+              <button type="button" class="lang-btn" data-lang="ru">РУС</button>
+            </div>
+          </li>
+          <li>
+            <button id="theme-toggle" class="theme-toggle" type="button" data-i18n="theme.toggle" data-i18n-attr="aria-label" aria-label="Փոխարկել լուսավոր/մուգ ռեժիմը">
+              <span class="theme-icon-light" aria-hidden="true">🌙</span>
+              <span class="theme-icon-dark" aria-hidden="true">☀️</span>
+            </button>
+          </li>
         </ul>
       </nav>
     </div>
   </header>
 
   <main class="container">
-    <h1>Ամրագրել սեղան</h1>
+    <svg class="deco-icon page-icon" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+      <line x1="14" y1="26" x2="50" y2="26" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      <line x1="20" y1="26" x2="20" y2="46" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      <line x1="44" y1="26" x2="44" y2="46" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      <path d="M6 46 L6 34 L12 34 L12 46" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M58 46 L58 34 L52 34 L52 46" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <line x1="4" y1="46" x2="14" y2="46" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="50" y1="46" x2="60" y2="46" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+    </svg>
+    <h1 data-i18n="booking.heading">Ամրագրել սեղան</h1>
+
+    <section class="table-selection">
+      <h2 data-i18n="booking.tableSelectionTitle">Ընտրեք սեղանը</h2>
+      <div class="table-legend">
+        <span class="legend-item"><span class="legend-dot legend-free"></span><span data-i18n="booking.legendFree">Ազատ</span></span>
+        <span class="legend-item"><span class="legend-dot legend-taken"></span><span data-i18n="booking.legendTaken">Զբաղված</span></span>
+      </div>
+      <div id="table-grid" class="table-grid" role="group" data-i18n="booking.tableGridAriaLabel" data-i18n-attr="aria-label" aria-label="Սեղանների հատակագիծ"></div>
+      <span class="field-error" id="table-error"></span>
+    </section>
 
     <form id="booking-form" class="booking-form" novalidate>
+      <input type="hidden" id="table" name="table" required>
+
       <div class="form-field">
-        <label for="name">Անուն</label>
+        <label for="name" data-i18n="booking.labelName">Անուն</label>
         <input type="text" id="name" name="name" required>
         <span class="field-error" id="name-error"></span>
       </div>
 
       <div class="form-field">
-        <label for="phone">Հեռախոսահամար</label>
+        <label for="phone" data-i18n="booking.labelPhone">Հեռախոսահամար</label>
         <input type="tel" id="phone" name="phone" required>
         <span class="field-error" id="phone-error"></span>
       </div>
 
       <div class="form-field">
-        <label for="date">Ամսաթիվ</label>
+        <label for="date" data-i18n="booking.labelDate">Ամսաթիվ</label>
         <input type="date" id="date" name="date" required>
         <span class="field-error" id="date-error"></span>
       </div>
 
       <div class="form-field">
-        <label for="time">Ժամ</label>
+        <label for="time" data-i18n="booking.labelTime">Ժամ</label>
         <select id="time" name="time" required>
-          <option value="" disabled selected>Ընտրեք ժամը</option>
+          <option value="" disabled selected data-i18n="booking.selectTimePlaceholder">Ընտրեք ժամը</option>
         </select>
         <span class="field-error" id="time-error"></span>
       </div>
 
       <div class="form-field">
-        <label for="guests">Մարդկանց քանակ</label>
+        <label for="guests" data-i18n="booking.labelGuests">Մարդկանց քանակ</label>
         <input type="number" id="guests" name="guests" min="1" max="10" required>
         <span class="field-error" id="guests-error"></span>
       </div>
 
       <div class="form-field">
-        <label for="notes">Հատուկ ցանկություններ</label>
+        <label for="notes" data-i18n="booking.labelNotes">Հատուկ ցանկություններ</label>
         <textarea id="notes" name="notes" rows="4"></textarea>
       </div>
 
       <p id="form-message" class="form-message" role="status" aria-live="polite"></p>
 
-      <button type="submit" class="btn">Ամրագրել</button>
+      <button type="submit" class="btn" data-i18n="booking.submit">Ամրագրել</button>
     </form>
   </main>
 
   <footer class="site-footer">
-    <p>&copy; 2026 Այգեստան</p>
+    <svg class="footer-divider" viewBox="0 0 400 20" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+      <defs>
+        <pattern id="footer-pattern-booking" width="40" height="20" patternUnits="userSpaceOnUse">
+          <path d="M20 4 L26 10 L20 16 L14 10 Z" fill="currentColor"/>
+        </pattern>
+      </defs>
+      <rect width="400" height="20" fill="url(#footer-pattern-booking)"/>
+    </svg>
+    <p data-i18n="footer.copyright">&copy; 2026 Այգեստան</p>
   </footer>
 
   <script src="js/services.js"></script>

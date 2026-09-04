@@ -14,6 +14,20 @@ function saveBookings(bookings) {
   localStorage.setItem(BOOKINGS_KEY, JSON.stringify(bookings));
 }
 
+function migrateBookings() {
+  const bookings = getBookings();
+  let changed = false;
+  bookings.forEach((booking) => {
+    if (!booking.table) {
+      booking.table = 1;
+      changed = true;
+    }
+  });
+  if (changed) {
+    saveBookings(bookings);
+  }
+}
+
 function formatDate(isoDate) {
   const [year, month, day] = isoDate.split("-");
   return `${day}.${month}.${year}`;
@@ -45,8 +59,8 @@ function renderBookings() {
     const emptyState = document.createElement("div");
     emptyState.className = "empty-state";
     emptyState.innerHTML = `
-      <p>Դուք դեռ ամրագրումներ չունեք։</p>
-      <a href="booking.html" class="btn">Ամրագրել սեղան</a>
+      <p>${t("myBookings.empty")}</p>
+      <a href="booking.html" class="btn">${t("myBookings.bookBtn")}</a>
     `;
     listContainer.appendChild(emptyState);
     return;
@@ -62,28 +76,34 @@ function renderBookings() {
       </div>
       <dl class="booking-details">
         <div class="booking-detail-row">
-          <dt>Անուն</dt>
+          <dt>${t("myBookings.labelName")}</dt>
           <dd>${escapeHtml(booking.name)}</dd>
         </div>
         <div class="booking-detail-row">
-          <dt>Հեռախոս</dt>
+          <dt>${t("myBookings.labelPhone")}</dt>
           <dd>${escapeHtml(booking.phone)}</dd>
         </div>
         <div class="booking-detail-row">
-          <dt>Մարդկանց քանակ</dt>
+          <dt>${t("myBookings.labelGuests")}</dt>
           <dd>${escapeHtml(String(booking.guests))}</dd>
+        </div>
+        <div class="booking-detail-row">
+          <dt>${t("myBookings.labelTable")}</dt>
+          <dd>${escapeHtml(String(booking.table))}</dd>
         </div>
         ${booking.notes ? `
         <div class="booking-detail-row">
-          <dt>Ցանկություններ</dt>
+          <dt>${t("myBookings.labelNotes")}</dt>
           <dd>${escapeHtml(booking.notes)}</dd>
         </div>` : ""}
       </dl>
-      <button type="button" class="btn btn-cancel" data-id="${booking.id}">Չեղարկել</button>
+      <button type="button" class="btn btn-cancel" data-id="${booking.id}">${t("myBookings.cancelBtn")}</button>
     `;
     listContainer.appendChild(card);
   });
 }
+
+document.addEventListener("languagechange", renderBookings);
 
 listContainer.addEventListener("click", (event) => {
   const cancelButton = event.target.closest(".btn-cancel");
@@ -94,4 +114,5 @@ listContainer.addEventListener("click", (event) => {
   cancelBooking(id);
 });
 
+migrateBookings();
 renderBookings();

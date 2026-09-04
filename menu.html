@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="hy">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="menu.pageTitle">Մենյու | Այգեստան</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <script src="js/theme.js"></script>
+  <script src="js/translations.js"></script>
+  <script src="js/language.js"></script>
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="logo">Այգեստան</a>
+      <nav class="main-nav" data-i18n="nav.ariaLabel" data-i18n-attr="aria-label" aria-label="Հիմնական նավիգացիա">
+        <ul>
+          <li><a href="index.html" data-i18n="nav.home">Գլխավոր</a></li>
+          <li><a href="menu.html" aria-current="page" data-i18n="nav.menu">Մենյու</a></li>
+          <li><a href="booking.html" data-i18n="nav.booking">Ամրագրել</a></li>
+          <li><a href="my-bookings.html" data-i18n="nav.myBookings">Իմ ամրագրումները</a></li>
+          <li>
+            <div class="lang-switch" role="group" data-i18n="lang.ariaLabel" data-i18n-attr="aria-label" aria-label="Ընտրել լեզուն">
+              <button type="button" class="lang-btn" data-lang="hy">ՀԱՅ</button>
+              <button type="button" class="lang-btn" data-lang="en">ENG</button>
+              <button type="button" class="lang-btn" data-lang="ru">РУС</button>
+            </div>
+          </li>
+          <li>
+            <button id="theme-toggle" class="theme-toggle" type="button" data-i18n="theme.toggle" data-i18n-attr="aria-label" aria-label="Փոխարկել լուսավոր/մուգ ռեժիմը">
+              <span class="theme-icon-light" aria-hidden="true">🌙</span>
+              <span class="theme-icon-dark" aria-hidden="true">☀️</span>
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <svg class="deco-icon page-icon" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+      <circle cx="32" cy="32" r="20" stroke="currentColor" stroke-width="3" fill="none"/>
+      <circle cx="32" cy="32" r="12" stroke="currentColor" stroke-width="2" fill="none" opacity="0.6"/>
+      <line x1="10" y1="14" x2="10" y2="50" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      <line x1="6" y1="14" x2="6" y2="24" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <line x1="14" y1="14" x2="14" y2="24" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <path d="M54 14 L54 30 C54 34 50 34 50 30 L50 14" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <line x1="52" y1="30" x2="52" y2="50" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+    </svg>
+    <h1 data-i18n="menu.heading">Մենյու</h1>
+    <div id="menu-list" class="menu-list"></div>
+  </main>
+
+  <footer class="site-footer">
+    <svg class="footer-divider" viewBox="0 0 400 20" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+      <defs>
+        <pattern id="footer-pattern-menu" width="40" height="20" patternUnits="userSpaceOnUse">
+          <path d="M20 4 L26 10 L20 16 L14 10 Z" fill="currentColor"/>
+        </pattern>
+      </defs>
+      <rect width="400" height="20" fill="url(#footer-pattern-menu)"/>
+    </svg>
+    <p data-i18n="footer.copyright">&copy; 2026 Այգեստան</p>
+  </footer>
+
+  <script src="js/menu.js"></script>
+  <script>
+    function renderMenuItem(item) {
+      const lang = getLanguage();
+      const li = document.createElement("li");
+      li.className = "menu-item";
+      li.innerHTML = `
+        <div class="menu-item-body">
+          <div class="menu-item-header">
+            <span class="menu-item-name">${item.name[lang]}</span>
+            <span class="menu-item-price">${item.price}</span>
+          </div>
+          <p class="menu-item-description">${item.description[lang]}</p>
+        </div>
+      `;
+      return li;
+    }
+
+    function renderItemsList(items) {
+      const ul = document.createElement("ul");
+      ul.className = "menu-items";
+      items.forEach((item) => {
+        ul.appendChild(renderMenuItem(item));
+      });
+      return ul;
+    }
+
+    const menuList = document.getElementById("menu-list");
+
+    function renderMenu() {
+      menuList.innerHTML = "";
+
+      menuData.forEach((category) => {
+        const section = document.createElement("section");
+        section.className = "menu-category";
+
+        const title = document.createElement("h2");
+        title.className = "menu-category-title";
+        title.textContent = t(`menu.categories.${category.key}`);
+        section.appendChild(title);
+
+        if (category.items) {
+          section.appendChild(renderItemsList(category.items));
+        }
+
+        if (category.subcategories) {
+          category.subcategories.forEach((sub) => {
+            const subWrapper = document.createElement("div");
+            subWrapper.className = "menu-subcategory";
+
+            const subTitle = document.createElement("h3");
+            subTitle.className = "menu-subcategory-title";
+            subTitle.textContent = t(`menu.subcategories.${sub.key}`);
+            subWrapper.appendChild(subTitle);
+            subWrapper.appendChild(renderItemsList(sub.items));
+
+            section.appendChild(subWrapper);
+          });
+        }
+
+        menuList.appendChild(section);
+      });
+    }
+
+    renderMenu();
+    document.addEventListener("languagechange", renderMenu);
+  </script>
+</body>
+</html>

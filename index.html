@@ -3,19 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Այգեստան | Ռեստորան</title>
+  <title data-i18n="home.pageTitle">Այգեստան | Ռեստորան</title>
   <meta name="description" content="Այգեստան ռեստորան՝ համեղ խոհանոց և հարմարավետ մթնոլորտ։ Ամրագրեք ձեր սեղանը հիմա։">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <script src="js/theme.js"></script>
+  <script src="js/translations.js"></script>
+  <script src="js/language.js"></script>
   <header class="site-header">
     <div class="container">
       <a href="index.html" class="logo">Այգեստան</a>
-      <nav class="main-nav" aria-label="Հիմնական նավիգացիա">
+      <nav class="main-nav" data-i18n="nav.ariaLabel" data-i18n-attr="aria-label" aria-label="Հիմնական նավիգացիա">
         <ul>
-          <li><a href="index.html" aria-current="page">Գլխավոր</a></li>
-          <li><a href="booking.html">Ամրագրել</a></li>
-          <li><a href="my-bookings.html">Իմ ամրագրումները</a></li>
+          <li><a href="index.html" aria-current="page" data-i18n="nav.home">Գլխավոր</a></li>
+          <li><a href="menu.html" data-i18n="nav.menu">Մենյու</a></li>
+          <li><a href="booking.html" data-i18n="nav.booking">Ամրագրել</a></li>
+          <li><a href="my-bookings.html" data-i18n="nav.myBookings">Իմ ամրագրումները</a></li>
+          <li>
+            <div class="lang-switch" role="group" data-i18n="lang.ariaLabel" data-i18n-attr="aria-label" aria-label="Ընտրել լեզուն">
+              <button type="button" class="lang-btn" data-lang="hy">ՀԱՅ</button>
+              <button type="button" class="lang-btn" data-lang="en">ENG</button>
+              <button type="button" class="lang-btn" data-lang="ru">РУС</button>
+            </div>
+          </li>
+          <li>
+            <button id="theme-toggle" class="theme-toggle" type="button" data-i18n="theme.toggle" data-i18n-attr="aria-label" aria-label="Փոխարկել լուսավոր/մուգ ռեժիմը">
+              <span class="theme-icon-light" aria-hidden="true">🌙</span>
+              <span class="theme-icon-dark" aria-hidden="true">☀️</span>
+            </button>
+          </li>
         </ul>
       </nav>
     </div>
@@ -24,15 +41,73 @@
   <main>
     <section class="hero container">
       <h1>Այգեստան</h1>
-      <p>
+      <p data-i18n="home.heroText">
         Ավանդական հայկական խոհանոց՝ ժամանակակից մատուցմամբ։ Մեր ռեստորանում
         ձեզ սպասվում է հարմարավետ մթնոլորտ, թարմ բաղադրիչներ և ջերմ սպասարկում։
       </p>
-      <a href="booking.html" class="btn">Ամրագրել սեղան</a>
+      <a href="booking.html" class="btn" data-i18n="home.heroBtn">Ամրագրել սեղան</a>
+    </section>
+
+    <section class="about container">
+      <svg class="deco-icon section-icon" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+        <path d="M20 8 C20 22 26 28 32 28 C38 28 44 22 44 8 Z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
+        <line x1="32" y1="28" x2="32" y2="48" stroke="currentColor" stroke-width="3"/>
+        <line x1="20" y1="56" x2="44" y2="56" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+        <line x1="32" y1="48" x2="32" y2="56" stroke="currentColor" stroke-width="3"/>
+      </svg>
+      <h2 data-i18n="home.aboutTitle">Մեր մասին</h2>
+      <p data-i18n="home.aboutText">
+        Այգեստան ռեստորանը հիմնված է ընտանեկան ավանդույթների և հայկական
+        հյուրասիրության ոգով։ Տասնամյակների ընթացքում մենք պահպանել ենք մեր
+        տատիկների բաղադրատոմսերը՝ դրանք համադրելով ժամանակակից մատուցման
+        հետ։ Յուրաքանչյուր հյուր մեզ մոտ ընդունվում է որպես ընտանիքի անդամ։
+      </p>
+    </section>
+
+    <section class="cuisine container">
+      <svg class="deco-icon section-icon" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+        <line x1="6" y1="32" x2="58" y2="32" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+        <rect x="14" y="24" width="10" height="16" rx="2" transform="rotate(45 19 32)" stroke="currentColor" stroke-width="3" fill="none"/>
+        <circle cx="32" cy="32" r="8" stroke="currentColor" stroke-width="3" fill="none"/>
+        <rect x="40" y="24" width="10" height="16" rx="2" transform="rotate(45 45 32)" stroke="currentColor" stroke-width="3" fill="none"/>
+      </svg>
+      <h2 data-i18n="home.cuisineTitle">Հայկական խոհանոց</h2>
+      <p data-i18n="home.cuisineText">
+        Հայկական խոհանոցը հայտնի է իր թարմ, բնական բաղադրիչներով և հարուստ
+        համային պալիտրայով։ Մեր խորոված ուտեստները պատրաստվում են բաց կրակի
+        վրա՝ ավանդական եղանակով։ Յուրաքանչյուր ուտեստ պատրաստվում է ըստ
+        սերնդեսերունդ փոխանցված բաղադրատոմսերի՝ պահպանելով ընտանեկան
+        ավանդույթների ջերմությունը։ Դրանք համադրվում են թարմ խոտաբույսերով,
+        խաղողի տերևներով և տեղական պանիրներով։
+      </p>
+    </section>
+
+    <section class="menu-teaser container">
+      <svg class="deco-icon section-icon" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+        <circle cx="32" cy="32" r="20" stroke="currentColor" stroke-width="3" fill="none"/>
+        <circle cx="32" cy="32" r="12" stroke="currentColor" stroke-width="2" fill="none" opacity="0.6"/>
+        <line x1="10" y1="14" x2="10" y2="50" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+        <line x1="6" y1="14" x2="6" y2="24" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <line x1="14" y1="14" x2="14" y2="24" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <path d="M54 14 L54 30 C54 34 50 34 50 30 L50 14" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <line x1="52" y1="30" x2="52" y2="50" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+      <h2 data-i18n="home.menuTeaserTitle">Մեր մենյուն</h2>
+      <p data-i18n="home.menuTeaserText">
+        Բացահայտեք ավանդական հայկական համերի աշխարհը՝ խորոված մսից մինչև
+        տնական աղանդեր։ Ահա մեր ամենասիրված ուտեստներից մի քանիսը՝
+      </p>
+      <ul class="menu-highlight-list">
+        <li data-i18n="home.dish1">Խորոված ողկույզ</li>
+        <li data-i18n="home.dish2">Դոլմա</li>
+        <li data-i18n="home.dish3">Խորոված իշխան</li>
+        <li data-i18n="home.dish4">Փախլավա</li>
+      </ul>
+      <a href="menu.html" class="btn" data-i18n="home.menuTeaserBtn">Տեսնել ամբողջ մենյուն</a>
     </section>
 
     <section class="hours container">
-      <h2>Աշխատանքային ժամեր</h2>
+      <h2 data-i18n="home.hoursTitle">Աշխատանքային ժամեր</h2>
       <dl id="working-hours">
         <!-- Ժամերը կլրացվեն js/services.js-ից -->
       </dl>
@@ -40,18 +115,34 @@
   </main>
 
   <footer class="site-footer">
-    <p>&copy; 2026 Այգեստան</p>
+    <svg class="footer-divider" viewBox="0 0 400 20" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+      <defs>
+        <pattern id="footer-pattern-index" width="40" height="20" patternUnits="userSpaceOnUse">
+          <path d="M20 4 L26 10 L20 16 L14 10 Z" fill="currentColor"/>
+        </pattern>
+      </defs>
+      <rect width="400" height="20" fill="url(#footer-pattern-index)"/>
+    </svg>
+    <p data-i18n="footer.copyright">&copy; 2026 Այգեստան</p>
   </footer>
 
   <script src="js/services.js"></script>
   <script>
     const hoursList = document.getElementById("working-hours");
-    restaurantInfo.workingHours.forEach(({ day, hours }) => {
-      const row = document.createElement("div");
-      row.className = "hours-row";
-      row.innerHTML = `<dt>${day}</dt><dd>${hours}</dd>`;
-      hoursList.appendChild(row);
-    });
+
+    function renderWorkingHours() {
+      hoursList.innerHTML = "";
+      const labels = [t("home.hoursWeekdays"), t("home.hoursWeekend")];
+      restaurantInfo.workingHours.forEach(({ hours }, index) => {
+        const row = document.createElement("div");
+        row.className = "hours-row";
+        row.innerHTML = `<dt>${labels[index]}</dt><dd>${hours}</dd>`;
+        hoursList.appendChild(row);
+      });
+    }
+
+    renderWorkingHours();
+    document.addEventListener("languagechange", renderWorkingHours);
   </script>
 </body>
 </html>
